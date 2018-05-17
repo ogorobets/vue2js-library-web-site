@@ -1,0 +1,25 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "name": "Marijn Haverbeke"
+    },
+    {
+      "id": 2,
+      "name": "Sandro Pasquali"
+    },
+    {
+      "id": 3,
+      "name": "Leo Tolstoy"
+    },
+    {
+      "id": 4,
+      "name": "Anton Chekhov"
+    },
+    {
+      "id": 5,
+      "name": "Campbell R. McConnell"
+    }
+  ],
+  "lastId": 5
+}

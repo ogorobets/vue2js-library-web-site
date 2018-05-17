@@ -1,0 +1,45 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "isbn": "978-1593275846",
+      "title": "Eloquent JavaScript, 2nd Ed.: A Modern Introduction to Programming",
+      "authorId": 1,
+      "description": "JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
+      "recordCreationDate": "Wed, 16 May 2018 09:39:12 GMT"
+    },
+    {
+      "id": 2,
+      "isbn": "978-1785888960",
+      "title": "Mastering Node.js - Second Edition: Build robust and scalable real-time server-side web applications efficiently",
+      "authorId": 2,
+      "description": "Expert techniques for building fast servers and scalable, real-time network applications with minimal effort; rewritten for Node.js 8 and Node.js 9",
+      "recordCreationDate": "Wed, 16 May 2018 09:40:09 GMT"
+    },
+    {
+      "id": 3,
+      "isbn": "978-0670034697",
+      "title": "War and Peace",
+      "authorId": 3,
+      "description": "Often called the greatest novel ever written, War and Peace is at once an epic of the Napoleonic Wars, a philosophical study, and a celebration of the Russian spirit. Tolstoy’s genius is seen clearly in the multitude of characters in this massive chronicle—all of them fully realized and equally memorable. Out of this complex narrative emerges a profound examination of the individual’s place in the historical process, one that makes it clear why Thomas Mann praised Tolstoy for his Homeric powers and placed War and Peace in the same category as the Iliad: “To read him . . . is to find one’ s way home . . . to everything within us that is fundamental and sane.”",
+      "recordCreationDate": "Wed, 16 May 2018 09:41:09 GMT"
+    },
+    {
+      "id": 4,
+      "isbn": "978-0486266824",
+      "title": "The Cherry Orchard",
+      "authorId": 4,
+      "description": "The Cherry Orchard was first produced by the Moscow Art Theatre on Chekhov's last birthday, January 17, 1904. Since that time it has become one of the most critically admired and performed plays in the Western world, a high comedy whose principal theme, the passing of the old semifeudal order, is symbolized in the sale of the cherry orchard owned by Madame Ranevsky. The play also functions as a magnificent showcase for Chekhov's acute observations of his characters' foibles and for quizzical ruminations on the approaching dissolution of the world of the Russian aristocracy and life as it was lived on their great country estates...",
+      "recordCreationDate": "Wed, 16 May 2018 09:42:09 GMT"
+    },
+    {
+      "id": 5,
+      "isbn": "978-0070091917",
+      "title": "Economics, 18th Edition",
+      "authorId": 5,
+      "description": "The sixteenth edition cover includes a photograph of a roof detail of a building in the Cyclades, a group of Greek islands in the Aegean Sea. The location of the building is especially appropriate, given that the modern word \"economics\" comes from the Greek oikonomikos, meaning \"household management.\" The photo highlights Greek architecture, which combines reliance on precision of order and the ability to break away from strict geometrical precision to create a more pleasing whole. That is exactly what we have tried to accomplish with \"Economics\". Our goal is to present the principles of economics in a precise, orderly, step-by-step way. There is great beauty, logic, and power in economic models - a fact that we emphasize throughout the book. But an overemphasis on economic theory in the introductory course renders the subject flat and boring and does students a great disservice. Time and again \"Economics\" breaks away from the models by examining real-world examples and institutional detail. These necessary departures occur not only within the main flow of the text but also in special applications chapters, the new Consider this pieces, the Last Word minireadings, and the supporting web content. All this adds up, we think, to a more pleasing whole - in this case, a more realistic introduction to economics and the economy.",
+      "recordCreationDate": "Wed, 16 May 2018 09:43:09 GMT"
+    }
+  ],
+  "lastId": 5
+}
