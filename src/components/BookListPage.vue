@@ -1,8 +1,15 @@
 <template>
   <div>
-    <router-link to="/add-book">
-      <a class="add-book btn btn-primary"><i class="ion ion-md-add"></i> <span class="btn-text">Add book</span></a>
-    </router-link>
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-4">
+        <input type="text" class="search-input form-control" placeholder="Search query" v-model="searchQuery" @keyup="onSearchBook">
+      </div>
+      <div class="form-group col-xs-12 col-sm-8">
+        <router-link class="add-book btn btn-primary" to="/add-book">
+          <i class="ion ion-md-add"></i> <span class="btn-text">Add book</span>
+        </router-link>
+      </div>
+    </div>
     <book-list :page="page" @deleteBook="onDeleteBook"></book-list>
     <nav aria-label="Page navigation" v-if="pages.length > 0">
       <ul class="pagination">
@@ -42,7 +49,8 @@ export default {
       page: 1,
       pages: [],
       firstPageUrl: '',
-      lastPageUrl: ''
+      lastPageUrl: '',
+      searchQuery: ''
     }
   },
   methods: {
@@ -56,6 +64,7 @@ export default {
       this.page = Number(pageNumber) || 1
     },
     updatePagination() {
+      debugger
       const BOOKS_PER_PAGE = 5
       const pagesNumber = Math.ceil((this.$store.getters.bookList.length / BOOKS_PER_PAGE))
       this.pages = []
@@ -71,6 +80,10 @@ export default {
     onDeleteBook() {
       updatePagination()
       updatePageNumber()
+    },
+    onSearchBook() {
+      this.$store.dispatch( 'search', this.searchQuery )
+      this.updatePagination()
     }
   },
   watch: {
@@ -84,3 +97,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.add-book {
+  .ion.ion-md-add {
+    font-size: 20px;
+    padding-right: 5px;
+  }
+
+  .btn-text {
+    position: relative;
+    top: -2px;
+  }
+}
+</style>

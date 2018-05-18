@@ -42,8 +42,9 @@
 </template>
 
 <script>
+import filterBy from './../filters/filterBy.js'
 
-module.exports = {
+export default {
   data() {
     return {
       isEditBook: false,
@@ -125,13 +126,7 @@ module.exports = {
       this.form.author = author.name;
       this.isAuthorDropdownShown = false;
     },
-    filterBy (originalArr, fieldName, value) {
-      if (!value) return []
-      const returnVal = originalArr.filter((elem) => {
-        return (elem[fieldName].toLowerCase()).indexOf(value.toLowerCase()) !== -1
-      })
-      return returnVal;
-    },
+    filterBy: filterBy,
     showAuthorDropdown() {
       this.isAuthorDropdownShown = true;
     }

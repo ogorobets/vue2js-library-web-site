@@ -3,17 +3,19 @@ import Vuex from 'vuex'
 import jsonp from 'jsonp'
 import initialBooksInfo from './books.json'
 import initialAuthorsInfo from './authors.json'
+import filterBy from './../filters/filterBy.js'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     authorsInfo: initialAuthorsInfo,
-    booksInfo: initialBooksInfo
+    booksInfo: initialBooksInfo,
+    searchString: ''
   },
   getters: {
     bookList(state) {
-      return state.booksInfo.books
+      return filterBy(state.booksInfo.books, 'title', state.searchString)
     },
     authorsList(state) {
       return state.authorsInfo.authors
@@ -86,6 +88,9 @@ const store = new Vuex.Store({
         ...state.booksInfo.books,
         newBook
       ];
+    },
+    search(state, query) {
+      state.searchString = query
     }
   },
   actions: {
@@ -98,6 +103,9 @@ const store = new Vuex.Store({
     addBook({ commit }, newBook) {
       commit('addBook', newBook)
     },
+    search({ commit }, query) {
+      commit('search', query)
+    }
   }
 })
 

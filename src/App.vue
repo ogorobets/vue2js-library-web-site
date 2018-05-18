@@ -71,18 +71,4 @@ header .ion.ion-md-book {
   background-color: #145d80;
   color: #fff;
 }
-
-.add-book {
-  margin-bottom: 20px;
-
-  .ion.ion-md-add {
-    font-size: 20px;
-    padding-right: 5px;
-  }
-
-  .btn-text {
-    position: relative;
-    top: -2px;
-  }
-}
 </style>
