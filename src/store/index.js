@@ -64,21 +64,16 @@ const store = new Vuex.Store({
       })
     },
     editBook(state, { newBook, id}) {
-      let newBookList = state.booksInfo.books.filter((book) => {
-        return book.id != id
-      })
-
-      let currentBook = state.booksInfo.books.filter((book) => {
-        return book.id === id
-      })[0]
-
-      state.booksInfo.books = [
-        ...newBookList,
-        {
-          ...currentBook,
-          ...newBook
+      state.booksInfo.books = state.booksInfo.books.map((book) => {
+        if (book.id != id) {
+          return book;
+        } else {
+          return {
+            ...book,
+            ...newBook
+          }
         }
-      ]
+      })
     },
     addBook(state, newBook) {
       let lastId = ++state.booksInfo.lastId
