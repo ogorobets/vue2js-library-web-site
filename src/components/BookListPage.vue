@@ -84,6 +84,7 @@ export default {
     onSearchBook() {
       this.$store.dispatch( 'search', this.searchQuery )
       this.updatePagination()
+      this.$router.push('/')
     }
   },
   watch: {
