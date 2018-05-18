@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import filterBy from './../filters/filterBy.js'
 
 export default {
@@ -63,10 +65,10 @@ export default {
   },
   methods: {
     getAuthorName(authorId) {
-      return this.$store.getters.getAuthorName(authorId)
+      return this.getAuthorNameFromStore(authorId)
     },
     getAuthorId(authorName) {
-      return this.$store.getters.getAuthorId(authorName)
+      return this.getAuthorIdFromStore(authorName)
     },
     addBook() {
       let newBook = {
@@ -76,17 +78,17 @@ export default {
         description: this.form.description,
         recordCreationDate: new Date().toUTCString()
       }
-      this.$store.dispatch('addBook', newBook )
+      this.addBookToStore(newBook)
     },
     editBook() {
       let newBook = {
         isbn: this.form.isbn,
         title: this.form.title,
-        author: this.form.author,
+        authorId: this.getAuthorId(this.form.author),
         description: this.form.description,
       }
 
-      this.$store.dispatch('editBook', { newBook, id: this.currentBook.id })
+      this.editBookInStore({ newBook, id: this.currentBook.id })
     },
     onCancel() {
       this.$router.push('/')
@@ -129,14 +131,18 @@ export default {
     filterBy: filterBy,
     showAuthorDropdown() {
       this.isAuthorDropdownShown = true;
-    }
+    },
+    ...mapActions({
+      addBookToStore: 'addBook',
+      editBookInStore: 'editBook'
+    }),
   },
   mounted() {
     this.isEditBook = this.$route.name === 'editBook';
     if (this.isEditBook) {
       this.pageHeading = 'Edit book info'
       let idToEdit = this.$route.params.id
-      let book = this.$store.getters.getBookById(idToEdit)
+      let book = this.getBookById(idToEdit)
 
       this.form = {
         ...book,
@@ -151,8 +157,14 @@ export default {
   },
   computed: {
     authors() {
-      return this.$store.getters.authorsList
-    }
+      return this.authorsList
+    },
+    ...mapGetters({
+      getAuthorNameFromStore :'getAuthorName',
+      getAuthorIdFromStore: 'getAuthorId',
+      getBookById: 'getBookById',
+      authorsList: 'authorsList'
+    })
   }
 }
 </script>

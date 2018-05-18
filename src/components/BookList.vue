@@ -40,6 +40,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'book-list',
   props: ['page'],
@@ -61,12 +64,12 @@ export default {
       return shortDescription
     },
     removeBook(bookIdToRemove) {
-      this.$store.dispatch('removeBook', bookIdToRemove)
+      this.removeBookFromStore(bookIdToRemove)
       this.checkNoPage()
       this.$emit('deleteBook')
     },
     getAuthorName(authorId) {
-      return this.$store.getters.getAuthorName(authorId)
+      return this.getAuthorNameFromStore(authorId)
     },
     checkNoPage(to) {
       const BOOKS_PER_PAGE = 5
@@ -79,7 +82,7 @@ export default {
       if (routeName === 'page') {
         this.isPageRoute = true
         const startBookNumber = (this.page - 1) * BOOKS_PER_PAGE
-        if (startBookNumber + 1 > this.$store.getters.bookList.length) {
+        if (startBookNumber + 1 > this.bookList.length) {
           this.isPageNotExist = true
         } else {
           this.isPageNotExist = false
@@ -87,7 +90,10 @@ export default {
       } else {
         this.isPageRoute = false
       }
-    }
+    },
+    ...mapActions({
+      removeBookFromStore: 'removeBook',
+    }),
   },
   watch: {
     '$route' (to, from) {
@@ -101,10 +107,14 @@ export default {
       const startBookNumber = (this.page - 1) * BOOKS_PER_PAGE
       const endBookNumber = this.page * BOOKS_PER_PAGE
       const bookListForPage = [
-        ...this.$store.getters.bookList.slice(startBookNumber, endBookNumber)
+        ...this.bookList.slice(startBookNumber, endBookNumber)
       ]
       return bookListForPage
-    }
+    },
+    ...mapGetters({
+      getAuthorNameFromStore: 'getAuthorName',
+      bookList: 'bookList'
+    })
   },
   mounted() {
     this.checkNoPage()

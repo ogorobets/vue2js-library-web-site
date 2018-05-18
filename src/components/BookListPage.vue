@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 import BookList from './BookList.vue'
 
 export default {
@@ -64,9 +66,8 @@ export default {
       this.page = Number(pageNumber) || 1
     },
     updatePagination() {
-      debugger
       const BOOKS_PER_PAGE = 5
-      const pagesNumber = Math.ceil((this.$store.getters.bookList.length / BOOKS_PER_PAGE))
+      const pagesNumber = Math.ceil((this.bookList.length / BOOKS_PER_PAGE))
       this.pages = []
       for(let i = 1; i < pagesNumber + 1; i++) {
         this.pages.push({
@@ -82,10 +83,18 @@ export default {
       updatePageNumber()
     },
     onSearchBook() {
-      this.$store.dispatch( 'search', this.searchQuery )
+      this.search(this.searchQuery)
       this.updatePagination()
       this.$router.push('/')
-    }
+    },
+    ...mapActions([
+      'search'
+    ]),
+  },
+  computed: {
+    ...mapGetters([
+      'bookList'
+    ])
   },
   watch: {
     '$route' (to, from) {
