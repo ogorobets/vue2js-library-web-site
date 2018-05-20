@@ -53,6 +53,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      removeBookFromStore: 'removeBook',
+      updatePagination: 'updatePagination'
+    }),
     getShortDescription(book) {
       const MAX_DESCRIPTION_LENGTH = 120;
       let shortDescription = '';
@@ -66,7 +70,7 @@ export default {
     removeBook(bookIdToRemove) {
       this.removeBookFromStore(bookIdToRemove)
       this.checkNoPage()
-      this.$emit('deleteBook')
+      this.updatePagination()
     },
     getAuthorName(authorId) {
       return this.getAuthorNameFromStore(authorId)
@@ -91,9 +95,6 @@ export default {
         this.isPageRoute = false
       }
     },
-    ...mapActions({
-      removeBookFromStore: 'removeBook',
-    }),
   },
   watch: {
     '$route' (to, from) {
@@ -102,10 +103,9 @@ export default {
   },
   computed: {
     books() {
-      console.log(' page = ', this.page)
       const BOOKS_PER_PAGE = 5
-      const startBookNumber = (this.page - 1) * BOOKS_PER_PAGE
-      const endBookNumber = this.page * BOOKS_PER_PAGE
+      const startBookNumber = (this.paginationData.page - 1) * BOOKS_PER_PAGE
+      const endBookNumber = this.paginationData.page * BOOKS_PER_PAGE
       const bookListForPage = [
         ...this.bookList.slice(startBookNumber, endBookNumber)
       ]
@@ -113,11 +113,15 @@ export default {
     },
     ...mapGetters({
       getAuthorNameFromStore: 'getAuthorName',
-      bookList: 'bookList'
+      bookList: 'bookList',
+      paginationData: 'paginationData'
     })
   },
   mounted() {
     this.checkNoPage()
+  },
+  created() {
+    this.updatePagination()
   }
 }
 </script>

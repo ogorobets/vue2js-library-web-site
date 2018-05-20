@@ -11,7 +11,13 @@ const store = new Vuex.Store({
   state: {
     authorsInfo: initialAuthorsInfo,
     booksInfo: initialBooksInfo,
-    searchString: ''
+    searchString: '',
+    pagination: {
+      page: 1,
+      pages: [],
+      firstPageUrl: '',
+      lastPageUrl: '',
+    }
   },
   getters: {
     bookList(state) {
@@ -53,6 +59,9 @@ const store = new Vuex.Store({
         }
       }
     },
+    paginationData(state) {
+      return state.pagination
+    }
   },
   mutations: {
     set(state, {type, items}) {
@@ -86,7 +95,23 @@ const store = new Vuex.Store({
     },
     search(state, query) {
       state.searchString = query
-    }
+    },
+    updatePagination(state) {
+      const BOOKS_PER_PAGE = 5
+      const pagesNumber = Math.ceil((state.booksInfo.books.length / BOOKS_PER_PAGE))
+      state.pagination.pages = []
+      for(let i = 1; i < pagesNumber + 1; i++) {
+        state.pagination.pages.push({
+          pageNum: i,
+          url: '/page/' + i
+        });
+      }
+      state.pagination.firstPageUrl = '/page/1'
+      state.pagination.lastPageUrl = '/page/' + pagesNumber
+    },
+    updatePageNumber(state, pageNumber) {
+      state.pagination.page = Number(pageNumber) || 1
+    },
   },
   actions: {
     removeBook({ commit }, id) {
@@ -100,6 +125,12 @@ const store = new Vuex.Store({
     },
     search({ commit }, query) {
       commit('search', query)
+    },
+    updatePagination({ commit }) {
+      commit('updatePagination')
+    },
+    updatePageNumber({ commit }, pageNumber) {
+      commit('updatePageNumber', pageNumber)
     }
   }
 })
